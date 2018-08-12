@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Shrinkage - LD Game</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Montserrat:300" rel="stylesheet">
+	<link rel="stylesheet" href="style.scss">
+</head>
+<body>
+	<div id="title" class="fullscreen flex overlay">
+		<p>Shrinkage</p>
+		<p class="small">For Ludum Dare 42</p>
+	</div>
+
+	<div id="loading" class="fullscreen flex overlay visible">
+		<p>Loading</p>
+	</div>
+
+	<div class="fullscreen flex">
+		<div class="flex flex-row flex-top">
+			<div id="canvas-container" class="flex">
+				<canvas id="canvas"></canvas>
+			</div>
+
+			<div id="next-container">
+				<canvas id="next" width="80" height="80"></canvas>
+			</div>
+		</div>
+	</div>
+
+	<div class="score">
+		<p class="small">score</p>
+		<p id="score">0</p>
+	</div>
+
+	<div id="gameover">Game over</div>
+
+	<div id="paused" class="fullscreen flex overlay">
+		<p>Paused</p>
+		<p class="small"><kbd>esc</kbd> resume</p>
+	</div>
+
+
+	<div id="info" class="info visible">
+		<p><kbd>left</kbd><kbd>right</kbd> move</p>
+		<p><kbd>up</kbd> rotate</p>
+		<p><kbd>down</kbd> drop</p>
+		<p><kbd>esc</kbd> pause</p>
+	</div>
+
+	<div id="gameoverinfo" class="info">
+		<p><kbd>space</kbd> start new game</p>
+	</div>
+
+	<div id="tutorialstart" class="tutorial">
+		<div class="text">
+			<p>Shrinkage is similar to Tetris but a little different, as you'll soon see.</p>
+			<p>The controls are listed along the bottom of the screen.</p>
+			<p>Let's start by filling a line so we can clear it.</p>
+		</div>
+		<kbd>enter</kbd>
+	</div>
+
+	<div id="tutorial1" class="tutorial">
+			<div class="text">
+				<p>Oh no! Clearing that line made the world smaller.</p>
+				<p>Let's try to score a combo (clear 2 lines at the same time).</p>
+			</div>
+			<kbd>enter</kbd>
+		</div>
+	<div id="tutorial2" class="tutorial">
+		<div class="text">
+			<p>Nice! Combos don't cost lines, and they give more points.</p>
+			<p>How about we try for a super combo (3 or more lines).</p>
+		</div>
+		<kbd>enter</kbd>
+	</div>
+	<div id="tutorial3" class="tutorial">
+		<div class="text">
+			<p>Awesome! Super combos will give you lines back so you live longer.</p>
+			<p>They also earn you a ton of points.</p>
+		</div>
+		<kbd>enter</kbd>
+	</div>
+
+	<script src="main.ts" async defer></script>
+</body>
+</html>

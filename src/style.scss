@@ -1,0 +1,311 @@
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+	border: none;
+	box-sizing: border-box;
+	pointer-events: none;
+}
+
+html, body {
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+
+	font-family: 'Open Sans', sans-serif;
+}
+
+body {
+	transition: all 240ms ease-out;
+	> * { transition: all 240ms ease-out }
+
+	&.reloading {
+		background: #2f3640;
+		> * { opacity: 0 !important }
+	}
+}
+
+p {
+	color: #82868c;
+	font-size: 15px;
+}
+
+kbd {
+	display: inline-block;
+	padding: 2px 3px 2px 4px;
+	margin-right: 6px;
+	margin-top: 3px;
+
+	color: lighten(#82868c, 10%);
+	background: #eee;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+
+	font-size: 10px;
+	font-weight: 600;
+	font-family: 'Open Sans', sans-serif;
+	text-transform: uppercase;
+}
+
+.fullscreen {
+	z-index: 4;
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	height: 100vh;
+	width: 100vw;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+	&.flex-row { flex-direction: row }
+	&.flex-top { align-items: flex-start }
+}
+
+.overlay {
+	z-index: 9;
+	padding-bottom: 40px;
+
+	> * {
+		opacity: 0;
+		transition: all 200ms ease-out;
+	}
+
+	&.visible > * {
+		opacity: 1;
+	}
+
+	p {
+		color: #acafb3;
+		font-size: 28px;
+	}
+
+	p.small {
+		display: flex;
+		margin-bottom: 40px;
+
+		font-size: 15px;
+		padding-top: 10px;
+	}
+
+	kbd {
+		opacity: 0.8;
+	}
+}
+
+#title p:not(.small) {
+	color: white;
+	font-size: 32px;
+}
+
+.badge {
+	position: absolute;
+	left: 0;
+	width: 100vw;
+
+	z-index: 9;
+	animation: badge 1.5s ease-out;
+	animation-fill-mode: forwards;
+
+	color: white;
+	font-size: 32px;
+	font-weight: 300;
+	text-align: center;
+}
+
+#canvas-container {
+	width: 105vw;
+	height: 105vh;
+	margin: 0;
+
+	overflow: hidden;
+
+	border-radius: 4px;
+	box-shadow: 0 4px 6px rgba(#4b6584, 0.4);
+	background: #2f3640;
+
+	transition: all 240ms ease-in-out;
+
+	canvas {
+		opacity: 0;
+		transition: all 240ms ease-in-out;
+	}
+
+	&.visible {
+		margin-bottom: 40px;
+		margin-left: 65px;
+		canvas { opacity: 1 }
+	}
+}
+
+#next-container {
+	display: flex;
+	flex-direction: column;
+
+	width: 50px;
+	height: 50px;
+	margin-left: 15px;
+
+	canvas {
+		width: 48px;
+		height: 48px;
+		margin-bottom: 5px;
+
+		animation-duration: 240ms;
+		animation-timing-function: ease-out;
+		animation-fill-mode: forwards;
+
+		&.slideout {
+			animation-name: next-slideout;
+		}
+
+		&.slidein {
+			animation-name: next-slidein;
+		}
+	}
+}
+
+
+.info {
+	position: absolute;
+	bottom: -50px;
+	opacity: 0;
+	left: 0;
+	z-index: 1;
+
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+
+	transition: all 240ms ease-out;
+
+	p {
+		display: flex;
+		align-items: center;
+
+		padding: 10px 20px;
+		padding-bottom: 0;
+	}
+
+	&.visible {
+		bottom: 20px;
+		opacity: 1;
+	}
+}
+
+.score, #gameover {
+	position: absolute;
+	top: 30px;
+	left: 0;
+	z-index: 1;
+
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.score p {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 24px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	color: #778ca3;
+
+	&.small {
+		font-size: 15px;
+		margin-bottom: -4px;
+		opacity: 0.75;
+	}
+}
+
+.tutorial {
+	z-index: 10;
+	position: absolute;
+	bottom: calc(40vh - 10px);
+	left: calc(50vw - 300px);
+
+	display: flex;
+	align-items: center;
+
+	width: 600px;
+	padding: 12px 18px;
+
+	border-radius: 4px;
+	background: darken(#2f3640, 10%);
+	box-shadow: 0 4px 6px rgba(black, 0.2);
+
+	opacity: 0;
+	transition: all 240ms ease-out;
+
+	p {
+		color: #a5b1c2;
+
+		font-size: 15px;
+		text-align: left;
+	}
+
+	.text { flex-grow: 1 }
+
+	&.visible {
+		bottom: 40vh;
+		opacity: 1;
+	}
+}
+
+#gameover {
+	font-size: 40px;
+	font-weight: 300;
+	opacity: 0;
+	color: #778ca3;
+
+	transition: all 240ms ease-out;
+
+	&.visible {
+		top: 80px;
+		opacity: 1;
+	}
+}
+
+
+@keyframes next-slidein {
+	0% {
+		opacity: 0;
+		transform: translateX(10px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0px);
+	}
+}
+
+@keyframes next-slideout {
+	0% {
+		opacity: 1;
+		transform: translateX(0px);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateX(-10px);
+	}
+}
+
+@keyframes badge {
+	0% {
+		top: calc(50vh - 40px);
+		opacity: 0.8;
+	}
+
+	100% {
+		top: calc(50vh - 100px);
+		opacity: 0;
+	}
+}
