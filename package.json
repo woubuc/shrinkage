@@ -1,11 +1,10 @@
 {
   "private": true,
   "name": "shrinkage",
-  "description": "My game for Ludum Dare 42",
-  "license": "MIT",
+  "description": "Score combos to expand, or die when you run out of space…",
+  "license": "UNLICENSED",
   "author": "Wouter Buckens <wou.buc@gmail.com>",
   "version": "0.1.0",
-  "main": "index.js",
   "scripts": {
     "build": "parcel build src/index.html",
     "dev": "parcel src/index.html"
